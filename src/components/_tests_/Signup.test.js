@@ -53,4 +53,56 @@ describe('signup form', () => {
     const button = screen.getByRole('button', { name: /Create Account/i });
     expect(button).toBeInTheDocument();
   })
+
+  test('user is able to type in name input', () => {
+    render(<Signup />);
+    const input = screen.getByLabelText(/name/i);
+    userEvent.type((input, 'Bobby Hill'));
+    expect(input).toHaveValue('Bobby Hill');
+  })
+
+  test('user is able to type in email input', () => {
+    render(<Signup />);
+    const input = screen.getByLabelText(/email/i);
+    userEvent.type((input, 'bobby@test.com'));
+    expect(input).toHaveValue('bobby@test.com');
+  })
+
+  test('user is able to type in DOB input', () => {
+    render(<Signup />);
+    const input = screen.getByLabelText(/date of birth/i);
+    userEvent.type((input, '01/01/2000'));
+    expect(input).toHaveValue('01/01/2000');
+  })
+
+  test('user is able to type in username input', () => {
+    render(<Signup />);
+    const input = screen.getByLabelText(/Username/i);
+    userEvent.type((input, 'testuser'));
+    expect(input).toHaveValue('testuser');
+  })
+
+  test('user is able to type in password input', () => {
+    render(<Signup />);
+    const input = screen.getByLabelText(/password/i);
+    userEvent.type((input, 'password'));
+    expect(input).toHaveValue('password');
+  })
+
+  test('user is able to type in password confirmation input', () => {
+    render(<Signup />);
+    const input = screen.getByLabelText(/confirm password/i);
+    userEvent.type((input, 'password'));
+    expect(input).toHaveValue('password');
+  })
+
+  test('user password and password confirmation are the same', () => {
+    render(<Signup />);
+    const password = screen.getByLabelText(/password/i);
+    const passwordConfirmation = screen.getByLabelText(/confirm password/i);
+    userEvent.type((password, 'password'));
+    userEvent.type((passwordConfirmation, 'password'));
+    expect(password).toHaveValue('password');
+    expect(passwordConfirmation).toHaveValue('password');
+  })
 })
