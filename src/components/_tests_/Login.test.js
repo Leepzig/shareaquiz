@@ -33,4 +33,11 @@ describe('login form', () => {
     expect(input).toHaveValue('testuser');
   })
 
+  test('user is able to type in password input', () => {
+    render(<Login />);
+    const input = screen.getByLabelText(/password/i);
+    userEvent.type((input, 'password'));
+    expect(input).toHaveValue('password');
+  })
+
 })
