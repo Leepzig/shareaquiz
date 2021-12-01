@@ -7,8 +7,22 @@ test('has a header of Please Login', () => {
   expect(header).toBeInTheDocument();
 })
 
-test('has a button with name of Login', () => {
-  render(<Login />);
-  const button = screen.getByRole('button', { name: 'Login' });
-  expect(button).toBeInTheDocument();
+describe('login form', () => {
+  test('has a username input', () => {
+    render(<Login />);
+    const username = screen.getByLabelText('Username');
+    expect(username).toBeInTheDocument();
+  })
+
+  test('has a password input', () => {
+    render(<Login />);
+    const password = screen.getByLabelText('Password');
+    expect(password).toBeInTheDocument();
+  })
+
+  test('has a button with name of Login', () => {
+    render(<Login />);
+    const button = screen.getByRole('button', { name: 'Login' });
+    expect(button).toBeInTheDocument();
+  })
 })
