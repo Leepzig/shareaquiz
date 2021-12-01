@@ -48,8 +48,6 @@ describe('signup form', () => {
     expect(passwordConfirmation).toBeInTheDocument();
   })
 
-
-
   test('has a button that says Create Account', () => {
     render(<Signup />);
     const button = screen.getByRole('button', { name: 'Create Account' });

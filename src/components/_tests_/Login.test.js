@@ -25,4 +25,12 @@ describe('login form', () => {
     const button = screen.getByRole('button', { name: 'Login' });
     expect(button).toBeInTheDocument();
   })
+
+  test('user is able to type in username input', () => {
+    render(<Login />);
+    const input = screen.getByLabelText('Username');
+    userEvent.type((input, 'testuser'));
+    expect(input).toHaveValue('testuser');
+  })
+
 })
