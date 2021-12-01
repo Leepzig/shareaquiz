@@ -39,7 +39,6 @@ describe('login form', () => {
     userEvent.type((input, 'password'));
     expect(input).toHaveValue('password');
   })
-
 })
 
 
