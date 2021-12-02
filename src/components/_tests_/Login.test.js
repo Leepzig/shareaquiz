@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import Login from '../sessions/Login';
+import userEvent from '@testing-library/user-event'
 
 test('has a header of Please Login', () => {
   render(<Login />);
