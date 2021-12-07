@@ -11,9 +11,16 @@ const NewQuiz = () => {
     }
 
     const addQuestion = (input) => {
-        
-    }
 
+    }
+    //user clicks new quiz on navbar
+    //input for title and category
+    //button to send request to create quiz
+    //new quiz is created and sent back
+    //create a new question using  that quiz
+    //have an input for a question and an answer
+    
+    //button for next question that saves the question
 
 
     return (
