@@ -1,15 +1,13 @@
 import { TextField, List, ListItem, Typography, Button, Box } from '@mui/material'
 import React, { useState } from 'react'
 import NewQuestion from './NewQuestion'
+import { useDispatch } from 'react-redux'
 
 const NewQuiz = () => {
-    const [question, setQuestion] = useState(false)
     const [questions, setQuestions] = useState([])
     const [quiz, setQuiz] = useState({titile:"", category:""})
 
-    const changeQuestion = () => {
-        setQuestion(!question)
-    }
+    const dispatch = useDispatch()
 
     const addQuestion = (input) => {
 
@@ -24,6 +22,7 @@ const NewQuiz = () => {
     const handleSubmit = e => {
         e.preventDefault()
         console.log(quiz)
+
     }
     //user clicks new quiz on navbar : Works
     //input for title and category
@@ -71,9 +70,10 @@ const NewQuiz = () => {
             />
             <Button type="submit" >Make Questions</Button>
             </Box>
-            <NewQuestion changeQuestion={changeQuestion}/>
-            <Typography variant="h3">Current Questions:</Typography>
+            <NewQuestion />
+            <Typography variant="h4">Current Questions:</Typography>
             <List>
+                {/* TODO: Make a component to map over to add edit and delete buttons out to the side */}
                 {questions.map(question => <ListItem >{question.question}</ListItem>)}
             </List>
         </div>

@@ -16,13 +16,11 @@ const NewQuestion = (props) => {
 
     const handleSubmit = e => {
         e.preventDefault()
-        props.changeQuestion()
         setForm({input:""})
         console.log(form.input)
     }
     return (
         <div>
-            <Typography>{props.children}</Typography>
             <Box component="form" onSubmit={handleSubmit}>
             <TextField
             margin="normal"
