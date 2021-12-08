@@ -1,9 +1,10 @@
 import React, { useState} from 'react'
-import { Button, Input, Typography } from '@mui/material';
+import { Button, TextField, Typography, Box } from '@mui/material';
 
 const NewQuestion = (props) => {
     const [form, setForm] = useState({
-        input:""
+        question:"",
+        answer:""
     })
 
     const handleChange = e => {
@@ -22,15 +23,31 @@ const NewQuestion = (props) => {
     return (
         <div>
             <Typography>{props.children}</Typography>
-            <form onSubmit={handleSubmit}>
-            <Input 
-            value={form.input}
-            name="input"
+            <Box component="form" onSubmit={handleSubmit}>
+            <TextField
+            margin="normal"
+            required
+            // fullWidth
+            type="text"
+            name="question"
+            label="Question"
+            id="question"
             onChange={handleChange}
-
+            value={form.question}
+            />
+            <TextField
+            margin="normal"
+            required
+            // fullWidth
+            type="text"
+            name="answer"
+            label="Answer"
+            id="answer"
+            onChange={handleChange}
+            value={form.answer}
             />
             <Button type="submit" variant="contained">Save</Button>
-            </form>
+            </Box>
             
         </div>
     )
