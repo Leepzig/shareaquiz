@@ -1,11 +1,14 @@
 import React, { useState} from 'react'
 import { Button, TextField, Typography, Box } from '@mui/material';
+import { addNewQuestion } from '../../actions/newQuizAction';
+import { useDispatch } from 'react-redux';
 
 const NewQuestion = (props) => {
     const [form, setForm] = useState({
         question:"",
         answer:""
     })
+    const dispatch = useDispatch()
 
     const handleChange = e => {
         setForm({
@@ -16,8 +19,12 @@ const NewQuestion = (props) => {
 
     const handleSubmit = e => {
         e.preventDefault()
-        setForm({input:""})
-        console.log(form.input)
+        setForm({
+            question:"",
+            answer:""
+        })
+        dispatch(addNewQuestion(form))        
+
     }
     return (
         <div>

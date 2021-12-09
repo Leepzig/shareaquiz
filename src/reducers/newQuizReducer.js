@@ -1,20 +1,21 @@
 const initalState = {
-    quiz:{
+    // quiz:{
         id:null,
         title:"",
         category:"",
         questions:[]
-    }
+    // }
 }
 
 const newQuizReducer = (state=initalState, {payload, type}) => {
     switch(type) {
         case "NEW_QUIZ":
-            debugger
-            return {...state, quiz:payload}
+            const {id, title, category} = payload
+            return {...state, id, title, category}
         case "ADD_QUESTION":
             // TODO refactor this to be more readable, too much spreading
-            return {...state}
+            // debugger
+            return {...state, questions:[...state.questions, payload]}
         default:
             return state
     }
