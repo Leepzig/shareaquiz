@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Navbar from './components/navigation/Navbar';
 import NewQuiz from './components/Quizes/NewQuiz'
 
+
 function App() {
   return (
     <div className="App">
