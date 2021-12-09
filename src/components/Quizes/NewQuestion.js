@@ -32,6 +32,7 @@ const NewQuestion = (props) => {
             <TextField
             margin="normal"
             required
+            autoFocus
             // fullWidth
             type="text"
             name="question"

@@ -64,6 +64,7 @@ const NewQuiz = () => {
             margin="normal"
             required
             // fullWidth
+            autoFocus
             type="text"
             name="title"
             label="Title"
