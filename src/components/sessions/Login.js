@@ -38,6 +38,7 @@ export default function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    //TODO: Investigate why to uset his?
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
     console.log({

@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 
 const NewQuiz = () => {
     const [questions, setQuestions] = useState([])
-    const [quiz, setQuiz] = useState({titile:"", category:""})
+    const [newQuiz, setNewQuiz] = useState({title:"", category:""})
 
     const dispatch = useDispatch()
 
@@ -14,15 +14,17 @@ const NewQuiz = () => {
     }
 
     const handleChange = e => {
-        setQuiz({
-            ...quiz,
-            [e.target.name]:e.target.target
+        setNewQuiz({
+            ...newQuiz,
+            [e.target.name]: e.target.value
         })
     }
     const handleSubmit = e => {
         e.preventDefault()
-        console.log(quiz)
-
+        //why does form use this format ?
+        //const data = new FormData(e.currentTarget)
+        debugger
+        console.log(newQuiz)
     }
     //user clicks new quiz on navbar : Works
     //input for title and category
@@ -55,7 +57,7 @@ const NewQuiz = () => {
             label="Title"
             id="title"
             onChange={handleChange}
-            value={quiz.title}
+            value={newQuiz.title}
             />
             <TextField
             margin="normal"
@@ -66,7 +68,7 @@ const NewQuiz = () => {
             label="Category"
             id="category"
             onChange={handleChange}
-            value={quiz.category}
+            value={newQuiz.category}
             />
             <Button type="submit" >Make Questions</Button>
             </Box>
