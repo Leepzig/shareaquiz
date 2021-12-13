@@ -12,8 +12,8 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from 'react-router-dom'
-// TODO get this list working for better scalability
-const pages = [{title:'Login',link:'/login'}, {title:'New Quiz', link:'/newquiz'}, {title:'New Account', link:'/newaccount'}];
+// TODO have conditional versions of this for if logged
+const pages = [ {title:"Home", link:'/home'}, {title:'New Quiz', link:'/newquiz'}, {title:'Login',link:'/login'}, {title:'New Account', link:'/newaccount'}];
 // const pages = ["Login", "Create Account", "Home", "New Quiz"];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -83,13 +83,6 @@ const Navbar = () => {
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center"><NavLink to={page.link}>{page.title}</NavLink></Typography>
                 </MenuItem>)}
-                {/* {/* <MenuItem onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center"><NavLink to="/newquiz">New Quiz</NavLink></Typography>
-                </MenuItem> */}
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center"><NavLink to="/login">TEST</NavLink></Typography>
-                </MenuItem>
-
             </Menu>
           </Box>
           <Typography

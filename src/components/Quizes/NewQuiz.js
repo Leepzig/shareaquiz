@@ -3,15 +3,14 @@ import React, { useState } from 'react'
 import NewQuestion from './NewQuestion'
 import { useDispatch, useSelector } from 'react-redux'
 import { createNewQuiz } from '../../actions/newQuizAction'
+import { useNavigate } from 'react-router'
 
 const NewQuiz = () => {
     const [newQuiz, setNewQuiz] = useState({title:"", category:""})
 
     const dispatch = useDispatch()
     const quiz = useSelector(state => state.newQuizReducer)
-    const addQuestion = (input) => {
-
-    }
+    const navigate = useNavigate()
 
     const handleChange = e => {
         setNewQuiz({
@@ -25,6 +24,11 @@ const NewQuiz = () => {
         //const data = new FormData(e.currentTarget)
         console.log(newQuiz)
         dispatch(createNewQuiz(newQuiz))
+    }
+
+    const submitQuiz = () => {
+        //TODO: Change this to view all created quizes, probably a recent created quizes, or the same user created quizes section
+        navigate("/home")
     }
     //user clicks new quiz on navbar : Works
     //input for title and category
@@ -43,7 +47,7 @@ const NewQuiz = () => {
     //NewQuizReducer
     //  Quiz:{id:1, category:"Animals", title:"Hungry Animals", questions:[{id:1, question:"?", answer:""}]}
     //Actions, new quiz, add question, load quiz (for editing), edit question, delete, 
-
+    
 
     if (quiz.id) {
         return (
@@ -55,6 +59,8 @@ const NewQuiz = () => {
                 {/* TODO: Make a component to map over to add edit and delete buttons out to the side */}
                 {quiz.questions.map(question => <ListItem key={question.id}>{question.question}</ListItem>)}
             </List>
+            <Button onClick={submitQuiz}>Confirm Quiz</Button>
+            {/* TODO: is this the best place for this button? */}
         </>
     )} else {
         return (
