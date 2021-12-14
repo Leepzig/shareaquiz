@@ -13,6 +13,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { login } from '../../actions/sessionsAction';
+import { useDispatch } from 'react-redux';
 
 function Copyright(props) {
   return (
@@ -31,9 +33,10 @@ const theme = createTheme();
 
 export default function Login() {
   const [form, setForm] = useState({
-    username: '',
+    email: '',
     password: ''
   })
+  const dispatch = useDispatch()
 
 
   const handleSubmit = (event) => {
@@ -41,8 +44,9 @@ export default function Login() {
     //TODO: Investigate why to uset his?
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
+    dispatch(login(form))
     console.log({
-      username: data.get('username'),
+      email: data.get('email'),
       password: data.get('password'),
     });
   };
@@ -78,13 +82,13 @@ export default function Login() {
               margin="normal"
               required
               fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoComplete="username"
+              id="email"
+              label="Email"
+              name="email"
+              autoComplete="email"
               autoFocus
               onChange={handleChange}
-              value={form.username}
+              value={form.email}
             />
             <TextField
               margin="normal"
