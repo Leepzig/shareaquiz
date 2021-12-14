@@ -34,8 +34,8 @@ export default function Signup() {
     username: '',
     email: '',
     password: '',
-    passwordConfirm: '',
-    dateOfBirth: '',
+    password_confirmation: '',
+    date_of_birth: '',
   })
   const dispatch = useDispatch()
 
@@ -135,25 +135,25 @@ export default function Signup() {
                 <TextField
                   required
                   fullWidth
-                  name="passwordConfirm"
+                  name="password_confirmation"
                   label="Confirm Password"
                   type="confirm password"
                   id="confirm password"
                   autoComplete="new-password"
                   onChange={handleChange}
-                  value={form.passwordConfirm}
+                  value={form.password_confirmation}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
-                  id="date of birth"
+                  id="date_of_birth"
                   label="Date of Birth"
-                  name="dateOfBirth"
+                  name="date_of_birth"
                   autoComplete="family-name"
                   onChange={handleChange}
-                  value={form.dateOfBirth}
+                  value={form.date_of_birth}
                 />
               </Grid>
               {/* <Grid item xs={12}>

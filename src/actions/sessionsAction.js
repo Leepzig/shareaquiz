@@ -22,7 +22,7 @@ export const login = (details) => {
     }
 }
 
-export const newUser = details => {
+export const newUser = (details) => {
     return async dispatch => {
         const options = {
             method:"POST",
