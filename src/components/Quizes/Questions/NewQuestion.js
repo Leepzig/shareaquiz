@@ -1,6 +1,6 @@
 import React, { useState} from 'react'
 import { Button, TextField, Typography, Box } from '@mui/material';
-import { addNewQuestion } from '../../actions/newQuizAction';
+import { addNewQuestion } from '../../../actions/newQuizAction';
 import { useDispatch } from 'react-redux';
 
 const NewQuestion = (props) => {
@@ -8,6 +8,7 @@ const NewQuestion = (props) => {
         question:"",
         answer:""
     })
+    const [focus, setFocus] = useState(true)
     const dispatch = useDispatch()
 
     const handleChange = e => {
@@ -24,7 +25,10 @@ const NewQuestion = (props) => {
             answer:""
         })
         dispatch(addNewQuestion(form))        
+    }
 
+    const changeFocus = e => {
+        setFocus(true)
     }
     return (
         <div>
@@ -32,7 +36,7 @@ const NewQuestion = (props) => {
             <TextField
             margin="normal"
             required
-            autoFocus
+            autoFocus 
             // fullWidth
             type="text"
             name="question"
@@ -50,6 +54,7 @@ const NewQuestion = (props) => {
             label="Answer"
             id="answer"
             onChange={handleChange}
+            onBlur={changeFocus}
             value={form.answer}
             />
             <Button type="submit" variant="contained">Save</Button>

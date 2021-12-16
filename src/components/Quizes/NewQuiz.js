@@ -1,9 +1,10 @@
 import { TextField, List, ListItem, Typography, Button, Box } from '@mui/material'
 import React, { useState } from 'react'
-import NewQuestion from './NewQuestion'
+import NewQuestion from './Questions/NewQuestion'
 import { useDispatch, useSelector } from 'react-redux'
 import { createNewQuiz } from '../../actions/newQuizAction'
 import { useNavigate } from 'react-router'
+import QuestionLineItem from './Questions/QuestionLineItem'
 
 const NewQuiz = () => {
     const [newQuiz, setNewQuiz] = useState({title:"", category:""})
@@ -55,81 +56,54 @@ const NewQuiz = () => {
             <Typography variant='h4'>{quiz.title}</Typography>
             <NewQuestion />
             <Typography variant="h4">Current Questions:</Typography>
+            <Box
+                sx={{
+                    marginTop: 8,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                }}>
+
             <List>
                 {/* TODO: Make a component to map over to add edit and delete buttons out to the side */}
-                {quiz.questions.map(question => <ListItem key={question.id}>{question.question}</ListItem>)}
+                {quiz.questions.map(question => <QuestionLineItem key={question.id}>{question.question}</QuestionLineItem>)}
             </List>
             <Button onClick={submitQuiz}>Confirm Quiz</Button>
             {/* TODO: is this the best place for this button? */}
+            </Box>
         </>
     )} else {
         return (
             <>
             <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}>
-            <TextField
-            margin="normal"
-            required
-            // fullWidth
-            autoFocus
-            type="text"
-            name="title"
-            label="Title"
-            id="title"
-            onChange={handleChange}
-            value={newQuiz.title}
-            />
-            <TextField
-            margin="normal"
-            required
-            // fullWidth
-            type="text"
-            name="category"
-            label="Category"
-            id="category"
-            onChange={handleChange}
-            value={newQuiz.category}
-            />
-            <Button type="submit" >Make Questions</Button>
+                <TextField
+                margin="normal"
+                required
+                // fullWidth
+                autoFocus
+                type="text"
+                name="title"
+                label="Title"
+                id="title"
+                onChange={handleChange}
+                value={newQuiz.title}
+                />
+                <TextField
+                margin="normal"
+                required
+                // fullWidth
+                type="text"
+                name="category"
+                label="Category"
+                id="category"
+                onChange={handleChange}
+                value={newQuiz.category}
+                />
+                <Button type="submit" variant="contained">Create Quiz</Button>
             </Box>
             </>
         )
     }
-    // return (
-    //     <div>
-    //         {quiz.id ? <Typography variant='h4'>{quiz.title}</Typography>
-    //          :<Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}>
-    //         <TextField
-    //         margin="normal"
-    //         required
-    //         // fullWidth
-    //         type="text"
-    //         name="title"
-    //         label="Title"
-    //         id="title"
-    //         onChange={handleChange}
-    //         value={newQuiz.title}
-    //         />
-    //         <TextField
-    //         margin="normal"
-    //         required
-    //         // fullWidth
-    //         type="text"
-    //         name="category"
-    //         label="Category"
-    //         id="category"
-    //         onChange={handleChange}
-    //         value={newQuiz.category}
-    //         />
-    //         <Button type="submit" >Make Questions</Button>
-    //         </Box> }
-    //         <NewQuestion />
-    //         <Typography variant="h4">Current Questions:</Typography>
-    //         <List>
-    //             {/* TODO: Make a component to map over to add edit and delete buttons out to the side */}
-    //             {questions.map(question => <ListItem >{question.question}</ListItem>)}
-    //         </List>
-    //     </div>
-    // )
 }
 
 export default NewQuiz
