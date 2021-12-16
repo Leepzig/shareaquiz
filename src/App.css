@@ -41,3 +41,10 @@ a, a:visited, a:hover, a:active {
     transform: rotate(360deg);
   }
 }
+
+footer {
+  position: relative;
+  left: 0;
+  bottom: 0;
+  color: rgb(168, 167, 167);
+}

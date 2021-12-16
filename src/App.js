@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Navbar from './components/navigation/Navbar';
 import NewQuiz from './components/Quizes/NewQuiz'
 import Home from './components/navigation/Home';
+import footer from './components/footer';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route exact path = '/newaccount' element={<Signup />} />
           <Route exact path = '/newquiz' element={<NewQuiz />} />
         </Routes>
+      <footer align="center" className="footer--pin">{<footer />} testing</footer>
       </Router>
 
     </div>
