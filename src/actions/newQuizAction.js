@@ -1,14 +1,22 @@
 
-export const createNewQuiz = (form) => {
+import { baseURL } from "../GLOBALS"
+
+export const createNewQuiz = (form, id) => {
     return async dispatch => {
         //send form to server here
         //then dispatch the returned data as the payload
-        const payload = {
-            id:1,
-            title:form.title,
-            category:form.category
+        const options = {
+            method:'POST',
+            headers:{
+                "Accept":"application/json",
+                "Content-Type":"application/json",
+                "Authorization":`Bearer ${localStorage.getItem('jwt')}`
+            },
+            body:JSON.stringify(form)
         }
-        dispatch({type:"NEW_QUIZ", payload})
+        const response = await fetch(`${baseURL}/${id}/quizzes`, options)
+        const data = await response.json()
+        dispatch({type:"NEW_QUIZ", data})
     }
 }
 
