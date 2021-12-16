@@ -7,15 +7,14 @@ const PageFooter = (props) => {
 
   return (
     <div>
-      {/* testingfrom footer.js */}
-       <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/"> 
-        Squirrley Brackets Inc.
-       </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
+      <Typography variant="body2" color="text.secondary" align="center" {...props}>
+        {'Copyright © '}
+        <Link color="inherit" href="https://mui.com/">
+          Squirrley Brackets Inc.
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
     </div>
   )
 }

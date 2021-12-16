@@ -19,7 +19,6 @@ function App() {
           <Route exact path='/newaccount' element={<Signup />} />
           <Route exact path='/newquiz' element={<NewQuiz />} />
         </Routes>
-        {/* <footer align="center" className="footer--pin">SB</footer> */}
         <div className="footer--pin">
           <PageFooter />
         </div>
