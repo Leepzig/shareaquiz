@@ -42,7 +42,7 @@ a, a:visited, a:hover, a:active {
   }
 }
 
-footer {
+.footer--pin {
   position: fixed;
   bottom: 0;
   color: rgb(168, 167, 167);
