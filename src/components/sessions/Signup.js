@@ -3,8 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -12,6 +10,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { newUser } from '../../actions/sessionsAction';
+import { useDispatch } from 'react-redux'
 
 function Copyright(props) {
   return (
@@ -34,9 +34,10 @@ export default function Signup() {
     username: '',
     email: '',
     password: '',
-    passwordConfirm: '',
-    dateOfBirth: '',
+    password_confirmation: '',
+    date_of_birth: '',
   })
+  const dispatch = useDispatch()
 
   const handleChange = (event) => {
     setForm({
@@ -54,6 +55,7 @@ export default function Signup() {
       username: data.get('username'),
       password: data.get('password'),
     });
+    dispatch(newUser(form))
   };
 
   
@@ -133,25 +135,25 @@ export default function Signup() {
                 <TextField
                   required
                   fullWidth
-                  name="confirm password"
+                  name="password_confirmation"
                   label="Confirm Password"
-                  type="confirm password"
+                  type="password"
                   id="confirm password"
                   autoComplete="new-password"
                   onChange={handleChange}
-                  value={form.passwordConfirm}
+                  value={form.password_confirmation}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
-                  id="date of birth"
+                  id="date_of_birth"
                   label="Date of Birth"
-                  name="date of birth"
+                  name="date_of_birth"
                   autoComplete="family-name"
                   onChange={handleChange}
-                  value={form.dateOfBirth}
+                  value={form.date_of_birth}
                 />
               </Grid>
               {/* <Grid item xs={12}>
