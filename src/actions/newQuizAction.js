@@ -14,8 +14,9 @@ export const createNewQuiz = (form, id) => {
             },
             body:JSON.stringify(form)
         }
-        const response = await fetch(`${baseURL}/${id}/quizzes`, options)
+        const response = await fetch(`${baseURL}/users/${id}/quizzes`, options)
         const data = await response.json()
+        debugger
         dispatch({type:"NEW_QUIZ", data})
     }
 }
