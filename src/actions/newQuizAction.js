@@ -20,16 +20,26 @@ export const createNewQuiz = (form, id) => {
     }
 }
 
-export const addNewQuestion = form => {
+export const addNewQuestion = (form, quizId) => {
     return async dispatch => {
 
         //send post request with form
-
+        const options = {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json",
+                "Accept":"applicaiton/json",
+                "Authorization":`Bearer ${localStorage.getItem('jwt')}`
+            }, 
+            body:JSON.stringify(form)
+        }
+        const response = await fetch(`${baseURL}/${quizId}/questions`)
+        const data = await response.json()
         const payload = {
             id:1,
             question:form.question,
             answer:form.answer
         }
-        dispatch({type:"ADD_QUESTION", payload})
+        dispatch({type:"ADD_QUESTION", data})
     }
 }
