@@ -1,7 +1,7 @@
 import React, { useState} from 'react'
 import { Button, TextField, Typography, Box } from '@mui/material';
 import { addNewQuestion } from '../../../actions/newQuizAction';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const NewQuestion = (props) => {
     const [form, setForm] = useState({
@@ -10,6 +10,7 @@ const NewQuestion = (props) => {
     })
     const [focus, setFocus] = useState(true)
     const dispatch = useDispatch()
+    const quiz = useSelector(state => state.newQuiz)
 
     const handleChange = e => {
         setForm({
@@ -24,7 +25,7 @@ const NewQuestion = (props) => {
             question:"",
             answer:""
         })
-        dispatch(addNewQuestion(form))        
+        dispatch(addNewQuestion(form, quiz.id))        
     }
 
     const changeFocus = e => {

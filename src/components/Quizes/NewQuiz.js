@@ -10,7 +10,8 @@ const NewQuiz = () => {
     const [newQuiz, setNewQuiz] = useState({title:"", category:""})
 
     const dispatch = useDispatch()
-    const quiz = useSelector(state => state.newQuizReducer)
+    const quiz = useSelector(state => state.newQuiz)
+    const user = useSelector(state => state.sessions.user)
     const navigate = useNavigate()
 
     const handleChange = e => {
@@ -24,7 +25,7 @@ const NewQuiz = () => {
         //why does form use this format ?
         //const data = new FormData(e.currentTarget)
         console.log(newQuiz)
-        dispatch(createNewQuiz(newQuiz))
+        dispatch(createNewQuiz(newQuiz, user.id))
     }
 
     const submitQuiz = () => {
