@@ -137,7 +137,7 @@ export default function Signup() {
                   fullWidth
                   name="password_confirmation"
                   label="Confirm Password"
-                  type="confirm password"
+                  type="password"
                   id="confirm password"
                   autoComplete="new-password"
                   onChange={handleChange}

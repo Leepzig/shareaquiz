@@ -34,8 +34,9 @@ export const newUser = (details) => {
         }
         const response = await fetch(`${baseURL}/signup`, options)
         const data = await response.json()
-        localStorage.setItem("jwt", data.jwt)
-        dispatch({type:"LOGIN", payload:data.user})
+        debugger
+        // localStorage.setItem("jwt", data.jwt)
+        dispatch({type:"NEW_USER", payload:data})
     }
 }
 
