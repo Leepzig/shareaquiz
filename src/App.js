@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Navbar from './components/navigation/Navbar';
 import NewQuiz from './components/Quizes/NewQuiz'
 import Home from './components/navigation/Home';
-import footer from './components/footer';
+import PageFooter from './components/PageFooter';
 
 
 function App() {
@@ -20,8 +20,11 @@ function App() {
           <Route exact path = '/newquiz' element={<NewQuiz />} />
         </Routes>
       {/* <footer align="center" className="footer--pin">{<footer />} testing</footer> */}
-      <footer align="center" className="footer--pin">SB</footer>
+      {/* <footer align="center" className="footer--pin">SB</footer> */}
       </Router>
+      <div className="footer--pin">
+        <PageFooter />
+      </div>
 
     </div>
   );
