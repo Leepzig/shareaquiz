@@ -16,7 +16,7 @@ export const login = (details) => {
         //TODO set up error handling
         const response = await fetch(`${baseURL}/login`, options)
         const data = await response.json()
-        debugger
+
         localStorage.setItem("jwt", data.jwt)
         dispatch({type:"LOGIN", payload:data.user})
     }
@@ -34,7 +34,7 @@ export const newUser = (details) => {
         }
         const response = await fetch(`${baseURL}/signup`, options)
         const data = await response.json()
-        debugger
+
         // localStorage.setItem("jwt", data.jwt)
         dispatch({type:"NEW_USER", payload:data})
     }
@@ -51,7 +51,7 @@ export const getCurrentUser = () => {
         }
         const response = await fetch(`${baseURL}/get-current-user`, options)
         const data = await response.json()
-        debugger
+
         dispatch({type:"LOGIN", payload: data.user})
     }
 }
