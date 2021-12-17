@@ -40,7 +40,7 @@ export const newUser = (details) => {
     }
 }
 
-export const currentUser = () => {
+export const getCurrentUser = () => {
     return async dispatch => {
         const options = {
             headers:{
@@ -51,6 +51,7 @@ export const currentUser = () => {
         }
         const response = await fetch(`${baseURL}/get-current-user`, options)
         const data = await response.json()
+        debugger
         dispatch({type:"LOGIN", payload: data.user})
     }
 }

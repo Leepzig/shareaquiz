@@ -6,9 +6,19 @@ import Navbar from './components/navigation/Navbar';
 import NewQuiz from './components/Quizes/NewQuiz'
 import Home from './components/navigation/Home';
 import PageFooter from './components/PageFooter';
+import { useDispatch } from 'react-redux'
+import { getCurrentUser } from './actions/sessionsAction'
+import { useEffect } from 'react'
 
 
 function App() {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    if (localStorage.getItem('jwt')){
+      dispatch(getCurrentUser())
+    }
+},[dispatch])
+
   return (
     <div className="App">
       <Router>
