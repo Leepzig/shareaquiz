@@ -34,9 +34,9 @@ export const addNewQuestion = (form, quizId) => {
             }, 
             body:JSON.stringify(form)
         }
-        const response = await fetch(`${baseURL}/${quizId}/questions`)
+        const response = await fetch(`${baseURL}/quizzes/${quizId}/questions`, options)
         const data = await response.json()
-        debugger
+
         dispatch({type:"ADD_QUESTION", payload:data})
     }
 }
