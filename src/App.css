@@ -41,3 +41,15 @@ a, a:visited, a:hover, a:active {
     transform: rotate(360deg);
   }
 }
+
+.footer--pin {
+  position: fixed;
+  bottom: 0;
+  color: rgb(168, 167, 167);
+  padding: 10px 10px 0px 10px;
+  height: 30px;
+  text-align: center;
+  margin-top : 40px; 
+  margin: auto;
+  width: 100%;
+}
