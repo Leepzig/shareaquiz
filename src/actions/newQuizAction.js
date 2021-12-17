@@ -16,8 +16,8 @@ export const createNewQuiz = (form, id) => {
         }
         const response = await fetch(`${baseURL}/users/${id}/quizzes`, options)
         const data = await response.json()
-        debugger
-        dispatch({type:"NEW_QUIZ", data})
+
+        dispatch({type:"NEW_QUIZ", payload:data})
     }
 }
 
@@ -34,13 +34,9 @@ export const addNewQuestion = (form, quizId) => {
             }, 
             body:JSON.stringify(form)
         }
-        const response = await fetch(`${baseURL}/${quizId}/questions`)
+        const response = await fetch(`${baseURL}/quizzes/${quizId}/questions`, options)
         const data = await response.json()
-        const payload = {
-            id:1,
-            question:form.question,
-            answer:form.answer
-        }
-        dispatch({type:"ADD_QUESTION", data})
+
+        dispatch({type:"ADD_QUESTION", payload:data})
     }
 }
