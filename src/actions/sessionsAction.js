@@ -1,7 +1,7 @@
 
 import { baseURL } from "../GLOBALS";
 
-export const login = (details) => {
+export const login = (details, navigate) => {
     return async dispatch => {
         //send server request
         const options = {
@@ -16,9 +16,15 @@ export const login = (details) => {
         //TODO set up error handling
         const response = await fetch(`${baseURL}/login`, options)
         const data = await response.json()
-
-        localStorage.setItem("jwt", data.jwt)
-        dispatch({type:"LOGIN", payload:data.user})
+        if (data.errors) {
+            console.log(data)
+            dispatch({type:"SET_ERRORS", payload:data.errors})
+        } else {
+            navigate('/')
+            localStorage.setItem("jwt", data.jwt)
+            dispatch({type:"LOGIN", payload:data.user})
+            dispatch({type:"CLEAR_ERRORS"})
+        }
     }
 }
 
