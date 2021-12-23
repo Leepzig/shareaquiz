@@ -15,7 +15,7 @@ import { NavLink } from 'react-router-dom'
 import { logout } from '../../actions/sessionsAction';
 import { useDispatch } from 'react-redux';
 // TODO have conditional versions of this for if logged
-const pages = [ {title:"Home", link:'/home'}, {title:'New Quiz', link:'/newquiz'}, {title:'Login',link:'/login'}, {title:'Logout', link:'/home'}, {title:'New Account', link:'/newaccount'}];
+const pages = [ {title:"Home", link:'/home'}, {title:'New Quiz', link:'/newquiz'}, {title:'Login',link:'/login'}, {title:'New Account', link:'/newaccount'}];
 // const pages = ["Login", "Create Account", "Home", "New Quiz"];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -41,7 +41,6 @@ const Navbar = () => {
 
   const handleLogout = () => {
     dispatch(logout())
-    debugger
     handleCloseNavMenu(null)
 
   }
@@ -93,7 +92,7 @@ const Navbar = () => {
                   <Typography textAlign="center"><NavLink to={page.link}>{page.title}</NavLink></Typography>
                 </MenuItem>)}
                 <MenuItem onClick={handleLogout}>
-                  <Typography textAlign="center" ><NavLink to='/home'>Logout</NavLink></Typography>
+                  <Typography textAlign="center" onClick={handleLogout}><NavLink to='/home'>Logout</NavLink></Typography>
                 </MenuItem>
             </Menu>
           </Box>
