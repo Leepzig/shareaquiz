@@ -1,5 +1,5 @@
 const initialState = {
-    errors:""
+    errors:null
 }
 
 const errorsReducer = (state=initialState, {type, payload}) => {
@@ -7,7 +7,7 @@ const errorsReducer = (state=initialState, {type, payload}) => {
         case "SET_ERRORS":
             return {errors:payload}
         case "CLEAR_ERRORS":
-            return {errors:""}
+            return state
         default:
             return state
     }

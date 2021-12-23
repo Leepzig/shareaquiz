@@ -3,11 +3,11 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 const Error = () => {
-    const error = useSelector(state => state.Error)
+    const error = useSelector(state => state.errors.errors)
 
     return (
         <>
-        <Typography >
+        <Typography style={{color:'red'}}>
             {error}
         </Typography>
         </>

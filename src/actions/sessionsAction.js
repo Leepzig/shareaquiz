@@ -1,5 +1,6 @@
 
 import { baseURL } from "../GLOBALS";
+import { setError } from "./errorsAction";
 
 export const login = (details, navigate) => {
     return async dispatch => {
@@ -18,7 +19,7 @@ export const login = (details, navigate) => {
         const data = await response.json()
         if (data.errors) {
             console.log(data)
-            dispatch({type:"SET_ERRORS", payload:data.errors})
+            dispatch({type:"SET_ERRORS", payload:data.errors[0]})
         } else {
             navigate('/')
             localStorage.setItem("jwt", data.jwt)
