@@ -18,7 +18,6 @@ export const login = (details, navigate) => {
         const response = await fetch(`${baseURL}/login`, options)
         const data = await response.json()
         if (data.errors) {
-            console.log(data)
             dispatch({type:"SET_ERRORS", payload:data.errors[0]})
         } else {
             navigate('/')
@@ -29,7 +28,7 @@ export const login = (details, navigate) => {
     }
 }
 
-export const newUser = (details) => {
+export const newUser = (details, navigate) => {
     return async dispatch => {
         const options = {
             method:"POST",
@@ -41,9 +40,16 @@ export const newUser = (details) => {
         }
         const response = await fetch(`${baseURL}/signup`, options)
         const data = await response.json()
+        debugger
+        if (data.errors) {
+            dispatch({type:"SET_ERRORS", payload:data.errors})
+        } else {
+            navigate('/')
+            dispatch({type:"LOGIN", payload:data.user})
+            dispatch({type:"CLEAR_ERRORS"})
+            localStorage.setItem("jwt", data.jwt)
 
-        // localStorage.setItem("jwt", data.jwt)
-        dispatch({type:"NEW_USER", payload:data})
+        }
     }
 }
 
