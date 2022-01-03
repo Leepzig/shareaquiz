@@ -12,6 +12,8 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from 'react-router-dom'
+import { logout } from '../../actions/sessionsAction';
+import { useDispatch } from 'react-redux';
 // TODO have conditional versions of this for if logged
 const pages = [ {title:"Home", link:'/home'}, {title:'New Quiz', link:'/newquiz'}, {title:'Login',link:'/login'}, {title:'New Account', link:'/newaccount'}];
 // const pages = ["Login", "Create Account", "Home", "New Quiz"];
@@ -21,7 +23,7 @@ const Navbar = () => {
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const dispatch = useDispatch()
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -37,6 +39,12 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
 
+  const handleLogout = () => {
+    dispatch(logout())
+    handleCloseNavMenu(null)
+
+  }
+
     return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -47,7 +55,7 @@ const Navbar = () => {
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            LOGO
+            Quizhare
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -83,6 +91,9 @@ const Navbar = () => {
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center"><NavLink to={page.link}>{page.title}</NavLink></Typography>
                 </MenuItem>)}
+                <MenuItem onClick={handleLogout}>
+                  <Typography textAlign="center" onClick={handleLogout}><NavLink to='/home'>Logout</NavLink></Typography>
+                </MenuItem>
             </Menu>
           </Box>
           <Typography
@@ -91,7 +102,7 @@ const Navbar = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
           >
-            LOGO
+            Quizhare
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -104,6 +115,14 @@ const Navbar = () => {
                 </NavLink>
               </Button>
             ))}
+            <Button
+                key='logout'
+                onClick={handleLogout}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              ><NavLink to='/home'>
+                Logout
+                </NavLink>
+              </Button>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

@@ -12,6 +12,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { newUser } from '../../actions/sessionsAction';
 import { useDispatch } from 'react-redux'
+import Error from '../Error';
+import { useNavigate } from 'react-router-dom'
 
 
 const theme = createTheme();
@@ -26,6 +28,7 @@ export default function Signup() {
     date_of_birth: '',
   })
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleChange = (event) => {
     setForm({
@@ -43,7 +46,7 @@ export default function Signup() {
       username: data.get('username'),
       password: data.get('password'),
     });
-    dispatch(newUser(form))
+    dispatch(newUser(form, navigate))
   };
 
   
@@ -151,6 +154,7 @@ export default function Signup() {
                 />
               </Grid> */}
             </Grid>
+            <Error />
             <Button
               type="submit"
               fullWidth
