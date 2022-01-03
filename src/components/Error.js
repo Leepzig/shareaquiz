@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux'
 
 const Error = () => {
     const errors = useSelector(state => state.errors.errors)
-
     return (
         <>
         <List>

@@ -18,7 +18,7 @@ export const login = (details, navigate) => {
         const response = await fetch(`${baseURL}/login`, options)
         const data = await response.json()
         if (data.errors) {
-            dispatch({type:"SET_ERRORS", payload:data.errors[0]})
+            dispatch({type:"SET_ERRORS", payload:data.errors})
         } else {
             navigate('/')
             localStorage.setItem("jwt", data.jwt)
@@ -40,7 +40,6 @@ export const newUser = (details, navigate) => {
         }
         const response = await fetch(`${baseURL}/signup`, options)
         const data = await response.json()
-        debugger
         if (data.errors) {
             dispatch({type:"SET_ERRORS", payload:data.errors})
         } else {
