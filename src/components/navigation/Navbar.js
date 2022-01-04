@@ -14,14 +14,13 @@ import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from 'react-router-dom'
 import { logout } from '../../actions/sessionsAction';
 import { useDispatch, useSelector } from 'react-redux';
-// TODO have conditional versions of this for if logged
+// TODO clean and DRY this code up
 const userPages = [ {title:"Home", link:'/home'}, {title:'New Quiz', link:'/newquiz'}, ];
 const noUserPages = [ {title:"Home", link:'/home'}, {title:'New Account', link:'/newaccount'}, {title:'Login',link:'/login'}];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Navbar = () => {
   const user = useSelector(state => state.sessions.user)
-  debugger
   let pages = user ? userPages : noUserPages
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -93,9 +92,9 @@ const Navbar = () => {
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center"><NavLink to={page.link}>{page.title}</NavLink></Typography>
                 </MenuItem>)}
-                <MenuItem onClick={handleLogout}>
+                {user ? <MenuItem onClick={handleLogout}>
                   <Typography textAlign="center" onClick={handleLogout}><NavLink to='/home'>Logout</NavLink></Typography>
-                </MenuItem>
+                </MenuItem> : null}
             </Menu>
           </Box>
           <Typography
@@ -127,10 +126,10 @@ const Navbar = () => {
               </Button> : null}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          {user ? <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="User's first inital" >{user.username[0].toUpperCase()}</Avatar>
               </IconButton>
             </Tooltip>
             <Menu
@@ -155,7 +154,7 @@ const Navbar = () => {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </Box> : null}
         </Toolbar>
       </Container>
     </AppBar>
