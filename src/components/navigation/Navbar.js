@@ -15,6 +15,7 @@ import { NavLink } from 'react-router-dom'
 import { logout } from '../../actions/sessionsAction';
 import { useDispatch, useSelector } from 'react-redux';
 // TODO clean and DRY this code up
+// TODO the code needs to be changed so that it's more easily scaleable
 const userPages = [ {title:"Home", link:'/home'}, {title:'New Quiz', link:'/newquiz'}, ];
 const noUserPages = [ {title:"Home", link:'/home'}, {title:'New Account', link:'/newaccount'}, {title:'Login',link:'/login'}];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
