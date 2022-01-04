@@ -13,15 +13,17 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from 'react-router-dom'
 import { logout } from '../../actions/sessionsAction';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // TODO have conditional versions of this for if logged
-const pages = [ {title:"Home", link:'/home'}, {title:'New Quiz', link:'/newquiz'}, {title:'Login',link:'/login'}, {title:'New Account', link:'/newaccount'}];
-// const pages = ["Login", "Create Account", "Home", "New Quiz"];
+const userPages = [ {title:"Home", link:'/home'}, {title:'New Quiz', link:'/newquiz'}, ];
+const noUserPages = [ {title:"Home", link:'/home'}, {title:'New Account', link:'/newaccount'}, {title:'Login',link:'/login'}];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Navbar = () => {
-
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const user = useSelector(state => state.sessions.user)
+  debugger
+  let pages = user ? userPages : noUserPages
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const dispatch = useDispatch()
   const handleOpenNavMenu = (event) => {
@@ -115,14 +117,14 @@ const Navbar = () => {
                 </NavLink>
               </Button>
             ))}
-            <Button
+            {user? <Button
                 key='logout'
                 onClick={handleLogout}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               ><NavLink to='/home'>
                 Logout
                 </NavLink>
-              </Button>
+              </Button> : null}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
