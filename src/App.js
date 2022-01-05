@@ -9,6 +9,7 @@ import PageFooter from './components/PageFooter';
 import { useDispatch } from 'react-redux'
 import { getCurrentUser } from './actions/sessionsAction'
 import { useEffect } from 'react'
+import ListQuizzes from './components/Quizes/ListQuizzes';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route exact path='/login' element={<Login />} />
           <Route exact path='/newaccount' element={<Signup />} />
           <Route exact path='/newquiz' element={<NewQuiz />} />
+          <Route exact path='/quizzes' element={<ListQuizzes />} />
         </Routes>
         <div className="footer--pin">
           <PageFooter />
