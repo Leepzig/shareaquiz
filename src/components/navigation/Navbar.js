@@ -12,16 +12,20 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from 'react-router-dom'
-// TODO have conditional versions of this for if logged
-const pages = [ {title:"Home", link:'/home'}, {title:'New Quiz', link:'/newquiz'}, {title:'Login',link:'/login'}, {title:'New Account', link:'/newaccount'}];
-// const pages = ["Login", "Create Account", "Home", "New Quiz"];
+import { logout } from '../../actions/sessionsAction';
+import { useDispatch, useSelector } from 'react-redux';
+// TODO clean and DRY this code up
+// TODO the code needs to be changed so that it's more easily scaleable
+const userPages = [ {title:"Home", link:'/home'}, {title:'New Quiz', link:'/newquiz'}, ];
+const noUserPages = [ {title:"Home", link:'/home'}, {title:'New Account', link:'/newaccount'}, {title:'Login',link:'/login'}];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Navbar = () => {
-
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const user = useSelector(state => state.sessions.user)
+  let pages = user ? userPages : noUserPages
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const dispatch = useDispatch()
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -37,6 +41,12 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
 
+  const handleLogout = () => {
+    dispatch(logout())
+    handleCloseNavMenu(null)
+
+  }
+
     return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -47,7 +57,7 @@ const Navbar = () => {
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            LOGO
+            Quizhare
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -83,6 +93,9 @@ const Navbar = () => {
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center"><NavLink to={page.link}>{page.title}</NavLink></Typography>
                 </MenuItem>)}
+                {user ? <MenuItem onClick={handleLogout}>
+                  <Typography textAlign="center" onClick={handleLogout}><NavLink to='/home'>Logout</NavLink></Typography>
+                </MenuItem> : null}
             </Menu>
           </Box>
           <Typography
@@ -91,7 +104,7 @@ const Navbar = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
           >
-            LOGO
+            Quizhare
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -104,12 +117,20 @@ const Navbar = () => {
                 </NavLink>
               </Button>
             ))}
+            {user? <Button
+                key='logout'
+                onClick={handleLogout}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              ><NavLink to='/home'>
+                Logout
+                </NavLink>
+              </Button> : null}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          {user ? <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="User's first inital" >{user.username[0].toUpperCase()}</Avatar>
               </IconButton>
             </Tooltip>
             <Menu
@@ -134,7 +155,7 @@ const Navbar = () => {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </Box> : null}
         </Toolbar>
       </Container>
     </AppBar>

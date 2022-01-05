@@ -15,6 +15,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { login } from '../../actions/sessionsAction';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import Error from '../Error';
 
 
 const theme = createTheme();
@@ -25,6 +27,7 @@ export default function Login() {
     password: ''
   })
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
 
   const handleSubmit = (event) => {
@@ -32,7 +35,7 @@ export default function Login() {
     //TODO: Investigate why to uset his?
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
-    dispatch(login(form))
+    dispatch(login(form, navigate))
     console.log({
       email: data.get('email'),
       password: data.get('password'),
@@ -94,6 +97,7 @@ export default function Login() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+            <Error />
             <Button
               type="submit"
               fullWidth

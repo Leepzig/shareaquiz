@@ -1,5 +1,5 @@
 import React, { useState} from 'react'
-import { Button, TextField, Typography, Box } from '@mui/material';
+import { Button, TextField, Box } from '@mui/material';
 import { addNewQuestion } from '../../../actions/newQuizAction';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -8,7 +8,6 @@ const NewQuestion = (props) => {
         question:"",
         answer:""
     })
-    const [focus, setFocus] = useState(true)
     const dispatch = useDispatch()
     const quiz = useSelector(state => state.newQuiz)
 
@@ -28,9 +27,6 @@ const NewQuestion = (props) => {
         dispatch(addNewQuestion(form, quiz.id))        
     }
 
-    const changeFocus = e => {
-        setFocus(true)
-    }
     return (
         <div>
             <Box component="form" onSubmit={handleSubmit}>
@@ -55,7 +51,6 @@ const NewQuestion = (props) => {
             label="Answer"
             id="answer"
             onChange={handleChange}
-            onBlur={changeFocus}
             value={form.answer}
             />
             <Button type="submit" variant="contained">Save</Button>

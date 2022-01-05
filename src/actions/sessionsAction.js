@@ -1,7 +1,8 @@
 
 import { baseURL } from "../GLOBALS";
+import { setError } from "./errorsAction";
 
-export const login = (details) => {
+export const login = (details, navigate) => {
     return async dispatch => {
         //send server request
         const options = {
@@ -16,13 +17,18 @@ export const login = (details) => {
         //TODO set up error handling
         const response = await fetch(`${baseURL}/login`, options)
         const data = await response.json()
-
-        localStorage.setItem("jwt", data.jwt)
-        dispatch({type:"LOGIN", payload:data.user})
+        if (data.errors) {
+            dispatch({type:"SET_ERRORS", payload:data.errors})
+        } else {
+            navigate('/')
+            localStorage.setItem("jwt", data.jwt)
+            dispatch({type:"LOGIN", payload:data.user})
+            dispatch({type:"CLEAR_ERRORS"})
+        }
     }
 }
 
-export const newUser = (details) => {
+export const newUser = (details, navigate) => {
     return async dispatch => {
         const options = {
             method:"POST",
@@ -34,9 +40,15 @@ export const newUser = (details) => {
         }
         const response = await fetch(`${baseURL}/signup`, options)
         const data = await response.json()
+        if (data.errors) {
+            dispatch({type:"SET_ERRORS", payload:data.errors})
+        } else {
+            navigate('/')
+            dispatch({type:"LOGIN", payload:data.user})
+            dispatch({type:"CLEAR_ERRORS"})
+            localStorage.setItem("jwt", data.jwt)
 
-        // localStorage.setItem("jwt", data.jwt)
-        dispatch({type:"NEW_USER", payload:data})
+        }
     }
 }
 
