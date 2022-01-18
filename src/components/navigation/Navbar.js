@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect } from 'react'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,37 +14,38 @@ import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from 'react-router-dom'
 import { logout } from '../../actions/sessionsAction';
 import { useDispatch, useSelector } from 'react-redux';
+import UserAvatar from './UserAvatar';
 // TODO clean and DRY this code up
 // TODO the code needs to be changed so that it's more easily scaleable
 const userPages = [ {title:"Home", link:'/home'}, {title:'New Quiz', link:'/newquiz'}, ];
 const noUserPages = [ {title:"Home", link:'/home'}, {title:'New Account', link:'/newaccount'}, {title:'Login',link:'/login'}];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Navbar = () => {
+  const [pages, setPages] = useState(noUserPages)
   const user = useSelector(state => state.sessions.user)
-  let pages = user ? userPages : noUserPages
+
+  useEffect(() => {
+   setPages(user.id ? userPages : noUserPages)
+  }, [])
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
   const dispatch = useDispatch()
+  //moving anchorElUser state to UserAvatar componenet
+  //moving handleOpenUserMenu to UserAvatar
+  //moving handleCloseUserMenu to UserAvatar
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
   const handleLogout = () => {
     dispatch(logout())
+    setPages(noUserPages)
     handleCloseNavMenu(null)
-
   }
 
     return (
@@ -90,10 +91,10 @@ const Navbar = () => {
               }}
             >
                 {pages.map(page=> 
-                <MenuItem onClick={handleCloseNavMenu}>
+                <MenuItem id={page.title} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center"><NavLink to={page.link}>{page.title}</NavLink></Typography>
                 </MenuItem>)}
-                {user ? <MenuItem onClick={handleLogout}>
+                {user.id ? <MenuItem onClick={handleLogout}>
                   <Typography textAlign="center" onClick={handleLogout}><NavLink to='/home'>Logout</NavLink></Typography>
                 </MenuItem> : null}
             </Menu>
@@ -117,7 +118,7 @@ const Navbar = () => {
                 </NavLink>
               </Button>
             ))}
-            {user? <Button
+            {user.id ? <Button
                 key='logout'
                 onClick={handleLogout}
                 sx={{ my: 2, color: 'white', display: 'block' }}
@@ -127,35 +128,7 @@ const Navbar = () => {
               </Button> : null}
           </Box>
 
-          {user ? <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="User's first inital" >{user.username[0].toUpperCase()}</Avatar>
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box> : null}
+          {user.id ? <UserAvatar /> : false}
         </Toolbar>
       </Container>
     </AppBar>
