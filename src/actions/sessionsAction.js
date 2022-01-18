@@ -1,5 +1,5 @@
 
-import { baseURL } from "../GLOBALS";
+import { baseUrl } from "../GLOBALS";
 import { setError } from "./errorsAction";
 
 export const login = (details, navigate) => {
@@ -15,7 +15,7 @@ export const login = (details, navigate) => {
         }
         //Test to see if decontruction worked
         //TODO set up error handling
-        const response = await fetch(`${baseURL}/login`, options)
+        const response = await fetch(`${baseUrl}/login`, options)
         const data = await response.json()
         if (data.errors) {
             dispatch({type:"SET_ERRORS", payload:data.errors})
@@ -38,7 +38,7 @@ export const newUser = (details, navigate) => {
             },
             body:JSON.stringify(details)
         }
-        const response = await fetch(`${baseURL}/signup`, options)
+        const response = await fetch(`${baseUrl}/signup`, options)
         const data = await response.json()
         if (data.errors) {
             dispatch({type:"SET_ERRORS", payload:data.errors})
@@ -61,7 +61,7 @@ export const getCurrentUser = () => {
                 "Authorization":`Bearer ${localStorage.getItem('jwt')}`
             }
         }
-        const response = await fetch(`${baseURL}/get-current-user`, options)
+        const response = await fetch(`${baseUrl}/get-current-user`, options)
         const data = await response.json()
 
         dispatch({type:"LOGIN", payload: data.user})

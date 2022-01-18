@@ -1,5 +1,5 @@
 
-import { baseURL } from "../GLOBALS"
+import { baseUrl } from "../GLOBALS"
 
 export const createNewQuiz = (form, id) => {
     return async dispatch => {
@@ -14,7 +14,7 @@ export const createNewQuiz = (form, id) => {
             },
             body:JSON.stringify(form)
         }
-        const response = await fetch(`${baseURL}/users/${id}/quizzes`, options)
+        const response = await fetch(`${baseUrl}/users/${id}/quizzes`, options)
         const data = await response.json()
 
         dispatch({type:"NEW_QUIZ", payload:data})
@@ -34,7 +34,7 @@ export const addNewQuestion = (form, quizId) => {
             }, 
             body:JSON.stringify(form)
         }
-        const response = await fetch(`${baseURL}/quizzes/${quizId}/questions`, options)
+        const response = await fetch(`${baseUrl}/quizzes/${quizId}/questions`, options)
         const data = await response.json()
 
         dispatch({type:"ADD_QUESTION", payload:data})
