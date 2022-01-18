@@ -26,7 +26,7 @@ const Navbar = () => {
 
   useEffect(() => {
    setPages(user.id ? userPages : noUserPages)
-  }, [])
+  }, [user])
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const dispatch = useDispatch()
